@@ -1,0 +1,145 @@
+<% include header.html %>
+<style>
+    article{
+        width:100%;
+        padding:15px 30px;
+        box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        -moz-box-sizing: border-box;
+    }
+    form#contactForm{
+        float:left;
+        width:50%;
+        margin-right:0px;
+        border-right: 3px dashed #aaa;
+        box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        -moz-box-sizing: border-box;
+        margin-right: 0px;
+    }
+    #preview{
+        float: left;
+        width: 50%;
+        padding:15px;
+        box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        -moz-box-sizing: border-box;
+    }
+    #work,#paper{
+        margin-bottom:20px;
+    }
+    div.wait{
+        padding:10% 0px;
+        font-size:3rem;
+        text-align:center;
+    }
+    div.wait>span{
+        margin-right:10px;
+        color:#6fb7ab;
+    }
+    .edit-body{
+        display:none;
+    }
+    .lobody{
+        padding:8% 0%;
+        width:100%;
+    }
+    .lobody #contactForm{
+        float:none;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+    }
+</style>
+<article>
+    <div class="lobody clearfix">
+        <div id="contactForm">
+            <input type="password" value="pleaseeditsth" class="js-pwd">
+            <br/>
+            <input type="button" class="form-poshytip" value="submit" onclick="lockoff();">
+        </div>
+    </div>
+</article>
+<article class="edit-body">
+    <form action="/letmewritesomething" id="contactForm" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <div>
+                <input type="text" class="form-poshytip" name="title" title="标题">
+                <label for="title">标题</label>
+            </div>
+            <div>
+                <input type="radio" id="work" name="wp" value="Y">
+                <label for="work">work</label>
+                <input type="radio" checked="checked" id="paper" name="wp" value="N">
+                <label for="paper">paper</label>
+            </div>
+            <div>
+                <input type="text" class="form-poshytip" name="cate1" title="类别1">
+                <label for="cate1">类别1</label>
+            </div>
+            <div>
+                <input type="text" class="form-poshytip" name="cate2"  title="类别2">
+                <label for="cate2">类别2</label>
+            </div>
+            <div>
+                <textarea id="text-input" name="content" class="form-poshytip" oninput="this.editor.update()"
+                    rows="10" cols="60" title="正文">Type **Markdown** here.</textarea>
+            </div>
+            <div>
+                <input type="file" class="form-poshytip" name="img" accept="image/*" title="图片上传">
+                <label for="img">文件上传</label>
+            </div>
+            <div>
+                <input type="file" class="form-poshytip" name="multi" multiple="multiple" accept="image/*" title="图片上传">
+                <label for="img">多文件上传</label>
+            </div>
+            <div>
+                <input type="submit" name="submit" class="form-poshytip" value="submit" onclick="afterWrite();">
+            </div>
+            <div  id="demo" class="demo"></div>
+        </fieldset>
+    </form>
+    <div id="preview"  class="markdown-body"></div>
+    <div class="clearfix"></div>
+</article>
+<article class="after-edit" style="display:none">
+    <div class="wait"><span class="js-second">3</span>秒后会跳转到文章页面，请稍后</div>
+</article>
+<script src="/public/js/markdown.min.js"></script>
+<script>
+    function Editor(input, preview) {
+        this.update = function () {
+            preview.innerHTML = markdown.toHTML(input.value);
+        };
+        input.editor = this;
+        this.update();
+    }
+    var $ = function (id) { return document.getElementById(id); };
+    new Editor($("text-input"), $("preview"));
+    function afterWrite(){
+        $(".edit-body").hide();
+        $(".after-edit").show();
+        var value = 3;
+        setInterval(function(){       
+            value --;
+            if(value >= 0){
+                $(".js-second").text(value);
+            }
+        },1000);
+    }
+</script>
+<% include footer.html %>
+<script>
+    function lockoff(){
+        var str3 = 'pwd='+$(".js-pwd").val();
+        $.ajax({
+            url:'./lockedit',
+            type:"post",
+            data:str3,
+            success:function(data){
+                $("article:eq(0)").fadeOut();
+                $("article:eq(1)").fadeIn();
+            }
+        })
+    }
+</script>

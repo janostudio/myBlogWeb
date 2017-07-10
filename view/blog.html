@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+	
+		<% include header.html %>
+		
+		
+		<!-- MAIN -->
+		<div id="main">	
+			<div class="wrapper clearfix">
+			
+				
+
+				<!-- posts list -->
+	        	<div id="posts-list">
+	        	
+	        		<h2 class="page-heading"><span>BLOG</span></h2>	
+					<% for(var i=0; i<results.length; i++) {%>
+						<article class="format-standard">
+							<div class="entry-date"><div class="number"><%= results[i].day %></div> <div class="year"><%= results[i].month %>, <%= results[i].year %></div></div>
+							<div class="feature-image">
+								<a href="<%= results[i].coverimg %>" data-rel="prettyPhoto"><img src="<%= results[i].coverimg %>" alt="Alt text" /></a>
+							</div>
+							<h2  class="post-heading"><a href="/single?id=<%= results[i].id %>"><%= results[i].title %></a></h2>
+							<div class="excerpt"><%- results[i].content.substring(0, 30)+"..." %>
+							</div>
+							<a href="/single?id=<%= results[i].id %>" class="read-more">continue &#8594;</a>
+							<div class="meta">
+								<% if(results[i].scate){ %>
+								<div class="categories">In 
+									<% for(var j=0;j<results[i].scate.length;j++){ %>
+									<a href="#"><%= results[i].scate[j] %></a> 
+									<% } %>
+								</div>
+								<% } %>
+								<div class="comments"><a href="#"><%= results[i].readtimes %> readtimes </a></div>
+								<div class="user"><a href="#">By Janathon Jiang</a></div>
+							</div>
+						</article>
+					<% } %>
+					
+					<!-- page-navigation -->
+					<div class="page-navigation clearfix">
+					<% if(results[results.length-1].id > maix[1]){ %>
+						<div class="nav-next">
+							<a  href="/blog?id=<%= results[2].id %>&round=0">&#8592; Older Entries </a>
+						</div>
+					<% } %>
+					<% if(results[0].id < maix[0]){ %>
+						<div class="nav-previous">
+							<a href="/blog?id=<%= results[0].id %>&round=1">Newer Entries &#8594;</a> 
+						</div>
+					<% } %>
+    				<!--ENDS page-navigation -->
+    				
+    			</div>
+	        		
+	        		
+	        	</div>
+	        	<!-- ENDS posts list -->
+		
+				<!-- sidebar -->
+	        	<% include sidebar.html %>
+				<!-- ENDS sidebar -->
+	        	
+			</div>
+		</div>
+		<!-- ENDS MAIN -->
+		
+		<% include footer.html %>
+				

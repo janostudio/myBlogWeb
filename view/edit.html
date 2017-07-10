@@ -1,0 +1,267 @@
+<% include header.html %>
+<style>
+    article{
+        width:100%;
+        padding:15px 30px;
+        box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        -moz-box-sizing: border-box;
+    }
+    form#contactForm{
+        float:left;
+        width:50%;
+        margin-right:0px;
+        border-right: 3px dashed #aaa;
+        box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        -moz-box-sizing: border-box;
+        margin-right: 0px;
+    }
+    #preview{
+        float: left;
+        width: 50%;
+        padding:15px;
+        box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        -moz-box-sizing: border-box;
+    }
+    #work,#paper{
+        margin-bottom:20px;
+    }
+    div.wait{
+        padding:10% 0px;
+        font-size:3rem;
+        text-align:center;
+    }
+    div.wait>span{
+        margin-right:10px;
+        color:#6fb7ab;
+    }
+    #contactForm input.search[type="text"]{
+        width: 60px;
+        padding: 4px 15px;
+        margin-left: 15px;
+    }
+    #cover{
+        margin:10px 0px;
+        max-width:100%;
+        height:auto;
+    }
+    .delete-img{
+        position:relative;
+        width:60%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .multi-img{
+        width:30%;
+        margin:1%;
+        display: inline-block;
+    }
+    .delete-img>figcaption{
+        display:none;
+        position:absolute;
+        width:100%;
+        height:100%;
+        background-color:#ea4c88;
+    }
+    #contactForm .delete-img>figcaption>input{
+        position:relative;
+        top:30%;
+        left:50%;
+        margin-left:-30px;
+        color:#fff;
+        font-size:1.2rem;
+        border-radius:50%;
+        padding:23px 10px;
+        background-color: #6fb7ab;
+        cursor:pointer;
+    }
+    #contactForm .multi-img>figcaption>input{
+        font-size:1rem;
+        padding:18px 8px;
+        top:10%;
+    }
+    .edit-body{
+        display:none;
+    }
+    .lobody{
+        padding:8% 0%;
+        width:100%;
+    }
+    .lobody #contactForm{
+        float:none;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+    }
+</style>
+<article>
+    <div class="lobody clearfix">
+        <div id="contactForm">
+            <input type="text" class="js-pwd">
+            <br/>
+            <input type="button" class="form-poshytip" value="submit" onclick="lockoff();">
+        </div>
+    </div>
+</article>
+<article class="edit-body">
+    <form action="/pleaseeditsth" id="contactForm" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <div style="display: none;">
+                <input type="text" name="id" id="wpid">
+            </div>
+            <div>
+                <input type="text" class="form-poshytip" name="title" title="标题">
+                <label for="title">标题</label>
+            </div>
+            <div>
+                <input type="radio" id="work" name="wp" value="Y">
+                <label for="work">work</label>
+                <input type="radio" checked="checked" id="paper" name="wp" value="N">
+                <label for="paper">paper</label>
+                <input type="text" placeholder="序号" class="search">
+                <input type="button"  class="js-search" value="查询" onclick="search()">
+            </div>
+            <div>
+                <input type="text" class="form-poshytip" name="cate1" title="类别1">
+                <label for="cate1">类别1</label>
+            </div>
+            <div>
+                <input type="text" class="form-poshytip" name="cate2"  title="类别2">
+                <label for="cate2">类别2</label>
+            </div>
+            <div>
+                <textarea id="text-input" name="content" class="form-poshytip" oninput="this.editor.update()"
+                    rows="10" cols="60" title="正文">Type **Markdown** here.</textarea>
+            </div>
+            <div>
+                <figure class="delete-img">
+                    <figcaption onmouseleave="hidebtn(this)">
+                        <input type="button" value="Delete" onclick="removecover(this)">
+                    </figcaption>
+                    <img id="cover" onmouseover="showbtn(this)"/>
+                </figure>
+            </div>
+            <div>
+                <input type="file" class="form-poshytip" name="img" accept="image/*" title="图片上传">
+                <label for="img">文件上传</label>
+            </div>
+            <div class="js-multi">
+                
+            </div>
+            <div>
+                <input type="file" class="form-poshytip" name="multi" multiple="multiple" accept="image/*" title="图片上传">
+                <label for="img">多文件上传</label>
+            </div>
+            
+            <div>
+                <input type="submit" name="submit" class="form-poshytip" value="submit" onclick="afterWrite();">
+            </div>
+            <div  id="demo" class="demo"></div>
+        </fieldset>
+    </form>
+    <div id="preview"  class="markdown-body"></div>
+    <div class="clearfix"></div>
+</article>
+<script src="/public/js/markdown.min.js"></script>
+<script>
+    function Editor(input, preview) {
+        this.update = function () {
+            preview.innerHTML = markdown.toHTML(input.value);
+        };
+        input.editor = this;
+        this.update();
+    }
+    var $ = function (id) { return document.getElementById(id); };
+    new Editor($("text-input"), $("preview"));
+    function afterWrite(){
+        $("article").html('<div class="wait"><span class="js-second">3</span>秒后会跳转到文章页面，请稍后</div>');
+        var value = 3;
+        setInterval(function(){    
+            value --;
+            if(value >= 0){
+                $(".js-second").text(value);
+            }
+        },1000);
+    }
+</script>
+<% include footer.html %>
+<script>
+    var wpid;
+    //search paperorwork
+    function search(){
+        var w = document.getElementsByName("wp");
+        for (ob in w){
+            if(w[ob].checked){
+                //w[ob].value;
+                inpu = document.getElementsByClassName("search");
+                //inpu[0].value;
+                var dataString = 'wp='+w[ob].value+'&iid='+inpu[0].value;
+                worp =  w[ob].value;
+                $.ajax({
+                    url: "/editsearch",
+                    type: "post",
+                    data: dataString,
+                    success:function(data){
+                        wpid = data.id; 
+                        $("#wpid").val(data.id);
+                        $("input[name='title']").val(data.title);
+                        $("input[name='cate1']").val(data.cate1);
+                        $("input[name='cate2']").val(data.cate2);
+                        $("#text-input").val(data.content);
+                        $("#cover").attr("src",data.coverimg);
+                        if(typeof data.img != "undefined"){
+                            var str = '';
+                            for(i in data.img){
+                                str = str + '<figure class="delete-img multi-img">'+
+                                                '<figcaption onmouseleave="hidebtn(this)">'+
+                                                    '<input type="button" value="Delete" onclick="removeimg(this)">'+
+                                                '</figcaption>'+
+                                                '<img id="cover" src ="'+data.img[i]+'" onmouseover="showbtn(this)"/>'+
+                                            '</figure>';
+                            }
+                            $(".js-multi").html(str);
+                        }
+                    }
+                })
+            }
+        }  
+    }
+    function showbtn(obj){
+        $(obj).siblings().fadeIn();
+    }
+    function hidebtn(obj){
+        $(obj).fadeOut();
+    }
+    function removeimg(obj){
+        var str1 = 'src='+$(obj).parent().siblings().attr("src");
+        $.ajax({
+            url:"/removeimg",
+            type:"post",
+            data: str1            
+        });
+        $(obj).parent().parent().remove();
+    }
+    function removecover(obj){
+        var str2 = 'id='+wpid+'&wp='+worp;
+        $.ajax({
+            url:"/removecover",
+            type:"post",
+            data: str2            
+        });
+        $(obj).parent().parent().remove();
+    }
+    function lockoff(){
+        var str3 = 'pwd='+$(".js-pwd").val();
+        $.ajax({
+            url:'./lockedit',
+            type:"post",
+            data:str3,
+            success:function(data){
+                $("article:eq(0)").fadeOut();
+                $("article:eq(1)").fadeIn();
+            }
+        })
+    }
+</script>

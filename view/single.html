@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+	
+		<% include header.html %>
+		
+		
+		<!-- MAIN -->
+		<div id="main">	
+			<div class="wrapper clearfix">
+
+				<!-- posts list -->
+	        	<div id="posts-list" class="single-post">
+	        		
+	        		<h2 class="page-heading"><span>BLOG</span></h2>	
+	        		
+					<article class="format-standard">
+						<div class="entry-date"><div class="number"><%= results[0].day %></div> <div class="year"><%= results[0].month %>, <%= results[0].year %></div></div>
+						<div class="feature-image">
+							<a href="public/img/slides/01.jpg" data-rel="prettyPhoto"><img src="<%= results[0].coverimg %>" alt="Alt text" /></a>
+						</div>
+						<h2  class="post-heading"><a href="#"><%= results[0].title %></a></h2>
+						<div class="post-content markdown-body">
+							<%- results[0].content %>
+						</div>
+						<div class="meta">
+							<div class="categories">In
+								<% for(var j=0;j<scate.length;j++){ %>
+								<a href="#"><%= scate[j].name %></a> 
+								<% } %>
+							</div>
+							<div class="comments"><a href="#"><%= results[0].readtimes %> readtimes </a></div>
+							<div class="user"><a href="#">By Janathon Jiang</a></div>
+						</div>
+					
+					
+					
+	    				<!-- comments list -->
+						<div id="comments-wrap">
+							<h3 class="heading"><%= commit.length %> COMMENTS</h3>
+							<ol class="commentlist">
+								<% for(k=0;k<commit.length;k++){ %>
+									<% if(k%2==1){ %>
+										<li class="comment even thread-even depth-1" id="li-comment-1">
+											<div id="comment-1" class="comment-body clearfix">
+												<img alt='' src='http://0.gravatar.com/avatar/4f64c9f81bb0d4ee969aaf7b4a5a6f40?s=35&amp;d=&amp;r=G' class='avatar avatar-35 photo' height='35' width='35' />      
+												<div class="comment-author vcard"><%= commit[k].author %></div>
+												<div class="comment-meta commentmetadata">
+													<span class="comment-date"><%= commit[k].fnow %> </span>
+												</div>
+												<div class="comment-inner">
+													<p><%= commit[k].content %></p>
+												</div>
+											</div>
+										</li>
+									<% }else{ %>
+										<li class="comment odd thread-even depth-1" id="li-comment-3">
+											
+											<div id="comment-4" class="comment-body clearfix">
+												<img alt='' src='http://0.gravatar.com/avatar/4f64c9f81bb0d4ee969aaf7b4a5a6f40?s=35&amp;d=&amp;r=G' class='avatar avatar-35 photo' height='35' width='35' />      
+												<div class="comment-author vcard"><%= commit[k].author %></div>
+												<div class="comment-meta commentmetadata">
+													<span class="comment-date"><%= commit[k].fnow %></span>
+												</div>
+												<div class="comment-inner">
+													<p><%= commit[k].author %></p>
+												</div>
+											</div>
+										</li>
+									<% } %>
+								<% } %>					   
+								
+							</ol>
+						</div>
+						<!-- ENDS comments list -->
+						
+						
+						<!-- Respond -->				
+						<div id="respond">
+							
+							<div class="cancel-comment-reply"><a rel="nofollow" id="cancel-comment-reply-link" href="#respond" style="display:none;">Cancel reply</a></div>
+							<form action="/commit?id=<%= results[0].id %>" method="post" id="commentform">
+								<h3 class="heading">LEAVE A REPLY</h3>
+								<input type="text" name="author" id="author" value="" tabindex="1" />
+								<label for="author">Name <small>*</small></label><br/>
+							
+								<textarea name="comment" id="comment"  tabindex="4"></textarea>
+									
+								<p><input name="submit" type="submit" id="submit" tabindex="5" value="Post" /></p>
+								
+								<input type='hidden' name='comment_post_ID' value='' id='comment_post_ID' />
+								<input type='hidden' name='comment_parent' id='comment_parent' value='0' />	
+							</form>
+						</div>
+						<div class="clearfix"></div>
+						<!-- ENDS Respond -->
+			
+		        		</article>
+		        		
+		        	</div>
+		        	<!-- ENDS posts list -->
+		
+				<!-- sidebar -->
+	        	<% include sidebar.html %>
+				<!-- ENDS sidebar -->
+	        	
+			</div>
+		</div>
+		<!-- ENDS MAIN -->
+		
+		
+		<% include footer.html %>

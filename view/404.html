@@ -1,0 +1,39 @@
+<html !DOCTYPE>
+    <head>
+		<meta charset="utf-8"/>
+		<title>Jealand's Blog</title>	
+        <link rel="shortcut icon" href="/public/img/favicon/32fav.ico">	
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <style>
+            body{
+                background-color: #ebebeb;
+            }
+            .container{
+                display:flex;
+                display: -webkit-flex; /* Safari */
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items:center;
+                height: 100%;
+                text-align:center;
+            }
+            .title{
+                font-size:60px;
+                font-weight:900;
+            }
+            .container>img{
+                margin-top:-20px;
+            }
+            .container>p:nth-child(3){
+                font-size:24px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <p class="title">404</p>
+            <img src="/public/img/404.gif" alt="404">
+            <p>This is not the web page you are looking for.</p>
+        </div>
+    </body>
+</html>

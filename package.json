@@ -1,0 +1,44 @@
+{
+  "name": "myblogweb",
+  "version": "1.0.0",
+  "description": "blog web,wroten by nodejs & express.",
+  "main": "index.js",
+  "scripts": {
+    "test": "try it!"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/Oddbird/myBlogWeb.git"
+  },
+  "keywords": [
+    "blog",
+    "web"
+  ],
+  "author": "jiang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/Oddbird/myBlogWeb/issues"
+  },
+  "homepage": "https://gitlab.com/Oddbird/myBlogWeb#README",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "crypto": "0.0.3",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "forever": "^0.15.3",
+    "gulp": "^3.9.1",
+    "log4js": "^1.1.0",
+    "markdown": "^0.5.0",
+    "moment": "^2.17.1",
+    "multer": "^1.3.0",
+    "mysql": "^2.12.0"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-notify": "^3.0.0",
+    "gulp-rename": "^1.2.2"
+  }
+}

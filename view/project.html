@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+	
+		<% include header.html %>
+		
+		
+		<!-- MAIN -->
+		<div id="main">	
+			<div class="wrapper clearfix">
+			
+				
+				<h2 class="page-heading"><span>WORK</span></h2>	     	
+	        	
+				<!-- project content -->
+				<div id="project-content" class="clearfix">
+
+					<!-- slider -->
+					<div class="project-slider">
+				        <div class="flexslider">
+						  <ul class="slides">
+							<% for(j=0;j<results.img.length;j++){ %>
+								<li>
+									<img src="<%= results.img[j] %>" alt="alt text" />
+								</li>
+							<% } %>
+						  </ul>
+						</div>
+					</div>
+		        	<!-- ENDS slider -->
+		        	
+		        	<!-- heading -->
+					<div class="project-heading">
+						<h2><%= results[0].title %></h2>
+						<a href="#" class="launch">In Hangzhou</a>
+						<div class="clearfix"></div>
+					</div>
+					<!-- ENDS heading -->
+	        	
+	        	
+					<div class="project-description markdown-body">
+						<%- results[0].content %>						
+					</div>
+					
+					<div class="project-info">
+						<p>
+						<strong>Date</strong><br/>
+						<%= results[0].date %>
+						</p>
+						<p>
+						<strong>Skills</strong><br/>
+							<% for(i=0; i<results.cate.length; i++) {%>
+								<%= results.cate[i] %>
+							<% } %>
+						</p>
+					</div>
+					<div class="clearfix"></div>
+					
+					<div class="project-pager">
+						<a class="previous-project" href="./project?id=<%= results[0].id-1 %>">&#8592; Previous project</a>
+						<a class="next-project" href="./project?id=<%= results[0].id+1 %>">Next project &#8594;</a>
+					</div>
+					
+					
+					<!-- related -->
+					<div class="related-projects">
+						<div class="related-heading">Related projects</div>
+						<div class="related-list">
+							<% for(i=0; i<related.length; i++) {%>
+								<figure>
+									<a href="/project?id=<%= related[i].id %>" class="thumb"><img src="<%= related[i].coverimg %>" alt="Alt text" /></a>
+									<a href="/project?id=<%= related[i].id %>" class="heading"><%= related[i].title %></a>
+								</figure>
+							<% } %>	
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<!-- ENDS related -->
+					
+				</div>	        	
+	        	<!--  ENDS project content-->
+
+	        	
+			</div>
+		</div>
+		<!-- ENDS MAIN -->
+		
+		
+		<% include footer.html %>

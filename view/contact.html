@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+	
+		<% include header.html %>		
+		
+		<!-- MAIN -->
+		<div id="main">	
+			<div class="wrapper clearfix">
+			
+				
+				<!--<h2 class="page-heading"><span>CONTACT</span></h2>	-->
+	        	
+				<!-- page content -->
+	        	<div id="page-content" class="clearfix">
+					<!-- Map -->
+					<!--<div id="baiduMap" style="width:100%;height:300px;margin:10px 0px;"></div>-->
+					<!-- ENDS Map -->
+					<!--<div class="map-content">	
+						Welcome to Hangzhou
+					</div>-->
+					
+					
+					<form id="contactForm" action="#" method="post">
+						<h2 class="heading">Contact me using this form</h2>
+						<p> I'm a front-end developer,and currently learning nodejs, RN and page layout etc.. I am very glad to be able to communicate with you.</p>
+						<fieldset>
+							<div>
+								<input name="name"  id="name" type="text" class="form-poshytip" title="Enter your full name" />
+								<label>Name</label>
+							</div>
+							<div>
+								<input name="email"  id="email" type="text" class="form-poshytip" title="Enter your email address" />
+								<label>Email</label>
+							</div>
+							<!--<div>
+								<input name="web"  id="web" type="text" class="form-poshytip" title="Enter your website" />
+								<label>Website</label>
+							</div>-->
+							<div>
+								<textarea  name="comments"  id="comments" rows="5" cols="20" class="form-poshytip" title="Enter your comments"></textarea>
+							</div>
+							<p><input type="button" value="Send" name="submit" id="submit" /> <span id="error" class="warning">Message</span></p>
+						</fieldset>	
+					</form>
+					<p id="sent-form-msg" class="success">Form data sent. Thanks for your comments.</p>
+					<!-- ENDS form -->
+					
+					
+					<!-- contact sidebar -->
+		        	<aside id="contact-sidebar">
+		        		<div class="block">
+			        		<h4>Other information</h4>
+			        		<p>Waited to write.</p>
+			        		
+			        		<ul class="address-block">
+			        			<li class="address">West Lake, Hangzhou, China</li>
+			        			<!--<li class="phone">+123 456 789</li>
+			        			<li class="mobile">+123 456 789</li>-->
+			        			<li class="email"><a href="qinghuangnio@gmail.com">qinghuangnio@gmail.com</a></li>
+			        		</ul>
+			        		
+		        		</div>	        	
+		        	</aside>
+		        	<div class="clearfix"></div>
+					<!-- ENDS contact-sidebar -->
+					
+				</div>	        	
+	        	<!--  page content-->
+	        	
+	        	
+
+	        	
+			</div>
+		</div>
+		<!-- ENDS MAIN -->
+		
+		
+		<% include footer.html %>
+		<!-- form -->
+	   <script type="text/javascript" src="public/js/form-validation.js"></script>
+	   <!--<script src="http://api.map.baidu.com/api?v=2.0&ak=WaQiIYDK0awUOaNWHGdY168lcRZbhUmB" type="text/javascript"></script>
+	   <script type="text/javascript">
+			
+			if (navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(showPosition);
+			}else{
+				x.innerHTML="Geolocation is not supported by this browser.";
+			}
+
+			function showPosition(position){
+				var latit = position.coords.latitude;
+				var longi = position.coords.longitude;
+				console.log(180+longi,latit);
+				var map = new BMap.Map("baiduMap");          // 创建地图实例  
+				var point = new BMap.Point(180+longi,latit);  // 创建点坐标  
+				map.centerAndZoom(point, 13);                 // 初始化地图，设置中心点坐标和地图级别  
+			}
+	   </script>-->

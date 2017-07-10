@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="no-js">
+	
+		<% include header.html %>		
+		
+		<!-- MAIN -->
+		<div id="main">	
+			<div class="wrapper clearfix">
+			
+				
+				<h2 class="page-heading"><span>WORK</span></h2>	
+
+				<!-- thumbs -->
+				<div class="portfolio-thumbs clearfix" >
+					<% for(var i=0; i<results.length; i++) {%>
+						<figure>
+							<figcaption>
+								<strong><%= results[i].title %></strong>
+								<span><%= results[i].content %></span>
+								<em><%= results[i].date %></em>
+								<a href="/project" class="opener"></a>
+							</figcaption>
+							
+							<a href="/project?id=<%= results[i].id %>"  class="thumb"><img src="<%= results[i].coverimg %>" alt="Alt text" /></a>
+						</figure>
+					<% } %>
+		        </div>
+				<!-- ends thumbs-->
+				
+				
+				<!-- pager -->
+        		<ul class="pager">
+
+					<li class="paged">Page 1 of <%= pagenum %></li>
+					<% for(var i=1; i<=pagenum; i++) {%>
+						<% if(i==page){ %>
+							<li class="active"><a href="/portfolio?page=<%= i %>"><%= i %></a></li>
+						<% }else{ %>
+							<li><a href="/portfolio?page=<%= i %>"><%= i %></a></li>
+						<% } %>
+					<% } %>		
+					<!--<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>-->
+				</ul>
+				<div class="clearfix"></div>
+	        	<!-- ENDS pager -->
+		
+	        	
+			</div>
+		</div>
+		<!-- ENDS MAIN -->
+				
+		<% include footer.html %>
