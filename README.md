@@ -24,3 +24,5 @@
 * project：一组图片展示。
 * header：头部文件。
 * footer：脚步文件。
+
+目前已废弃此项目，改为HEXO。
